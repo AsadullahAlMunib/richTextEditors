@@ -1,0 +1,628 @@
+<!-- PRISM.JS FOR SYNTAX HIGHLIGHTING (YOUR REQUIRED)  -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+<!-- FROALA CORE CSS (LATEST VERSION - YOUR REQUIRED)  -->
+<link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/themes/dark.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/themes/gray.min.css" rel="stylesheet">
+<!-- FROALA PLUGINS CSS (LATEST - YOUR REQUIRED)       -->
+<link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/plugins.pkgd.min.css" rel="stylesheet">
+<!-- Include Code Mirror CSS. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
+<!-- Include TUI CSS. --> 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tui-image-editor@3.2.2/dist/tui-image-editor.css"> 
+<link rel="stylesheet" href="https://uicdn.toast.com/tui-color-picker/latest/tui-color-picker.css"> 
+<link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/third_party/image_tui.min.css" rel="stylesheet">
+
+<!-- PRISM.JS CORE (YOUR REQUIRED)                     -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<!-- FROALA EDITOR CORE JS (LATEST - YOUR REQUIRED)    -->
+<script src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
+<!-- FROALA PLUGINS JS (LATEST)                        -->
+<script src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/plugins.pkgd.min.js"></script>
+<!-- Include Word export JS --> 
+<script src="https://cdn.jsdelivr.net/npm/file-saver-es@2.0.5/dist/FileSaver.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html-docx-js@0.3.1/dist/html-docx.min.js"></script>
+<!-- Include Code Mirror JS. -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/default.min.css">
+<!-- Include TUI JS. --> 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.6.7/fabric.min.js"></script> 
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/tui-code-snippet@1.4.0/dist/tui-code-snippet.min.js"></script> 
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/tui-image-editor@3.2.2/dist/tui-image-editor.min.js"></script> 
+<script src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/third_party/image_tui.min.js"></script>
+
+<!-- MAIN EDITOR TEXTAREA                              -->
+<textarea id="richTextEditor" name="content" placeholder="Write your blog content here..."></textarea>
+
+<style>
+.fr-command.fr-btn[data-cmd="fontFamily"] {
+    max-width: 100px !important;
+}
+</style>
+
+<!-- ================================================ -->
+<!-- FROALA EDITOR CONFIGURATION - COMPLETE FREE      -->
+<!-- ================================================ -->
+<script>
+    // PRISM INITIALIZATION 
+    Prism.plugins.autoloader.languages_path = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/';
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(() => {
+            if (typeof Prism !== 'undefined') {
+                Prism.highlightAll();
+            }
+        }, 1000);
+    });
+
+    (function() {
+        // Get CSRF token for Laravel
+        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content || '';
+
+        // Check dark mode from HTML class
+        const isDarkMode = document.documentElement.classList.contains('dark');
+
+        var changeDirection = function (dir, align) {
+            // Wrap block tags.
+            this.selection.save();
+            this.html.wrap(true, true, true, true);
+            this.selection.restore();
+
+            // Get blocks.
+            var elements = this.selection.blocks();
+
+            // Save selection to restore it later.
+            this.selection.save();
+
+            for (var i = 0; i < elements.length; i++) {
+                var element = elements[i];
+                if (element != this.el) {
+                    this.$(element)
+                    .css('direction', dir)
+                    .css('text-align', align)
+                    .removeClass('fr-temp-div');
+                }
+            }
+
+            // Unwrap temp divs.
+            this.html.unwrap();
+
+            // Restore selection.
+            this.selection.restore();
+        }
+
+        FroalaEditor.DefineIcon('rightToLeft', {template: 'svg', PATH: 'M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z'});
+        FroalaEditor.RegisterCommand('rightToLeft', {
+            title: 'RTL',
+            focus: true,
+            undo: true,
+            refreshAfterCallback: true,
+            callback: function () {
+                changeDirection.apply(this, ['rtl', 'right']);
+            }
+        })
+
+        FroalaEditor.DefineIcon('leftToRight', {template: 'svg', PATH: 'M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z'});
+        FroalaEditor.RegisterCommand('leftToRight', {
+            title: 'LTR',
+            focus: true,
+            undo: true,
+            refreshAfterCallback: true,
+            callback: function () {
+                changeDirection.apply(this, ['ltr', 'left']);
+            }
+        })
+
+        function getDateTimeShort() {
+            const d = new Date();
+            return `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}-${String(d.getHours()).padStart(2,'0')}${String(d.getMinutes()).padStart(2,'0')}${String(d.getSeconds()).padStart(2,'0')}`;
+        }
+
+        // Initialize Froala Editor with ALL FREE features
+        new FroalaEditor('#richTextEditor', {
+            // BASIC SETTINGS
+            key: '{{ $froalaKey }}',
+            //height: window.innerWidth <= 576 ? 200 : 500,
+            width: '100%',
+            heightMin: window.innerWidth <= 576 ? 200 : 500,
+            heightMax: window.innerWidth <= 576 ? 500 : 800,
+            //placeholder: 'Write your content here...',
+            language: 'en',
+            theme: isDarkMode ? 'dark' : 'gray',
+
+            // Include PDF export JS lib.
+            //documentReady: true,
+            wordExportFileName: 'blogCreateExport-'+getDateTimeShort(),
+
+            // DISABLE QUICK INSERT (Plus button)
+            quickInsertEnabled: false,
+            animation: true,
+            animationDuration: 300,
+            pluginsDisabled: ['filestack'],
+
+            // COMPLETE TOOLBAR WITH ALL FEATURES
+            toolbarButtons: {
+                // MAIN VISIBLE BUTTONS
+                'main': {
+                    'buttons': [
+                        'bold', 'italic', 'underline', 'fontFamily', 'fontSize'
+                    ],
+                    'buttonsVisible': 12,
+                    'align': 'left'
+                },
+
+                // ALL OTHER FEATURES IN DROPDOWNS
+                'moreText': {
+                    'buttons': [
+                        'subscript', 'superscript', 'inlineStyle', 'inlineClass', 'clearFormatting',
+                        'textColor', 'backgroundColor', 'strikeThrough', 'insertLink', 'insertAnchor'
+                    ],
+                    'buttonsVisible': 0,
+                    'title': 'More Text',
+                    'icon': true,
+                    'align': 'left'
+                },
+
+                'moreParagraph': {
+                    'buttons': [
+                        'paragraphFormat', 'align', 'paragraphStyle', 'formatOL', 'formatUL', 'lineHeight',
+                        'indent', 'outdent', 'quote', 'leftToRight', 'rightToLeft'
+                    ],
+                    'buttonsVisible': 0,
+                    'title': 'More Paragraph',
+                    'icon': true,
+                    'align': 'left'
+                },
+
+                'moreRich': {
+                    'buttons': [
+                        'insertImage', 'insertVideo', 'insertTable',
+                        'emoticons', 'specialCharacters', 'findReplaceButton',
+                        'insertHR', 'pageBreak', 'insertTemplates', 'markdown', 'codeSnippet'
+                    ],
+                    'buttonsVisible': 0,
+                    'title': 'More Rich',
+                    'icon': true,
+                    'align': 'left'
+                },
+
+                'moreMisc': {
+                    'buttons': [
+                        'undo', 'redo', 'fullscreen', 'selectAll', 'print', 'help', 'export_to_word',
+                        'html', 'codeView', 'wordPaste'
+                    ],
+                    'buttonsVisible': 2,
+                    'title': 'More Misc',
+                    'icon': true,
+                    'align': 'right'
+                }
+            },
+            fontFamilySelection: true,
+            fontSizeSelection: true,
+            paragraphFormatSelection: true,
+
+            // CODE SNIPPET - 30+ LANGUAGES
+            codeSnippet: true,
+            codeSnippetDefaultLanguage: 'html',
+            codeSnippetLanguage: {
+                // ========== MOST USED LANGUAGES (Top 20) ==========
+                'JavaScript': 'javascript',
+                'Python': 'python',
+                'PHP': 'php',
+                'HTML': 'html',
+                'CSS': 'css',
+                'TypeScript': 'typescript',
+                'Java': 'java',
+                'C#': 'csharp',
+                'C++': 'cpp',
+                'C': 'c',
+                'SQL': 'sql',
+                'Go': 'go',
+                'Rust': 'rust',
+                'Ruby': 'ruby',
+                'Swift': 'swift',
+                'Kotlin': 'kotlin',
+                'Dart': 'dart',
+                'JSON': 'json',
+                'SVG': 'svg',
+                'Markdown': 'markdown',
+                'YAML': 'yaml',
+
+                // ========== WEB TECHNOLOGIES ==========
+                'JSX (React)': 'jsx',
+                'TSX (React)': 'tsx',
+                'XML': 'xml',
+                'GraphQL': 'graphql',
+
+                // ========== C FAMILY ==========
+                'Arduino': 'ino',
+                'Objective-C': 'objectivec',
+                'Assembly': 'arm-asm',
+
+                // ========== DATABASE ==========
+                'MySQL': 'sql',
+                'PostgreSQL': 'sql',
+
+                // ========== SHELL ==========
+                'Bash': 'bash',
+                'PowerShell': 'powershell',
+                'Batch': 'batch',
+
+                // ========== MOBILE ==========
+                'Flutter': 'dart',
+                'React Native': 'jsx',
+
+                // ========== CONFIG ==========
+                'INI': 'ini',
+                'DockerFile': 'dockerfile',
+
+                // ========== DATA SCIENCE ==========
+                'R': 'r',
+                'MATLAB': 'matlab',
+
+                // ========== TEMPLATES ==========
+                'Django': 'django'
+            },
+            codeSnippetOptions: {
+                lineNumbers: true,
+                codeBlockClass: 'line-numbers',
+                highlightLines: true,
+                showLanguage: true,
+                copyToClipboard: true,
+                wrapLines: false,
+                modal: {
+                    // width: 700,
+                    // height: 500,
+                    title: 'Insert Code Snippet',
+                    buttons: {
+                        insert: 'Insert Code',
+                        cancel: 'Cancel'
+                    },
+
+                    autoClose: true,
+                    closeOnEscape: true,
+                    closeOnClickOutside: true
+                }
+            },
+
+            // code Beautifier Options 
+            codeBeautifierOptions: {
+                end_with_newline: true,
+                indent_inner_html: true,    
+                extra_liners: [
+                    'p', 'h1', 'h2', 'h3',
+                    'h4', 'h5', 'h6', 'blockquote', 'pre', 
+                    'ul', 'ol', 'table', 'dl'
+                ],
+                brace_style: 'collapse',
+                indent_char: '\t',
+                indent_size: 1,
+                wrap_line_length: 0
+            },
+
+            // FONT FAMILY - 12+ FONTS
+            fontFamily: {
+                'Arial,Helvetica,sans-serif': 'Arial',
+                'Georgia,serif': 'Georgia',
+                "'Times New Roman',Times,serif": 'Times New Roman',
+                'Verdana,Geneva,sans-serif': 'Verdana',
+                "'Trebuchet MS',Helvetica,sans-serif": 'Trebuchet MS',
+                "'Courier New',Courier,monospace": 'Courier New',
+                "'Comic Sans MS',cursive,sans-serif": 'Comic Sans',
+                'Impact,Charcoal,sans-serif': 'Impact',
+                'Tahoma,Geneva,sans-serif': 'Tahoma',
+                "'Palatino Linotype','Book Antiqua',serif": 'Palatino',
+                "'Lucida Sans Unicode','Lucida Grande',sans-serif": 'Lucida',
+                "'Fira Code',monospace": 'Fira Code',
+                'Roboto,sans-serif': 'Roboto',
+                'Ubuntu,Arial,sans-serif': 'Ubuntu',
+                'Cantarell,Arial,sans-serif': 'Cantarell',
+                'Menlo,Monaco,Consolas,Courier New,monospace': 'Monaco/Consolas',
+                'Consolas,Monaco,monospace': 'Consolas'
+            },
+
+            // FONT SIZE - 25+ SIZES
+            fontSize: [
+                '8','9','10','11','12','13','14','15','16','17','18','19','20',
+                '22','24','26','28','30','32','34','36','38','40','42','44','48',
+                '52','56','60','64','68','72'
+            ],
+
+            // LINE HEIGHTS - 12+ OPTIONS
+            lineHeights: {
+                Default: '', Single: '1', Double: '2',
+                '0.9': '0.9', '0.95': '0.95', '1.05': '1.05', '1.1': '1.1', '1.15': '1.15',
+                '1.2': '1.2', '1.25': '1.25', '1.3': '1.3', '1.35': '1.35', '1.4': '1.4',
+                '1.5': '1.5', '1.6': '1.6', '1.8': '1.8', '2.2': '2.2', '2.5': '2.5'
+            },
+
+            // COLORS - 50+ COLORS
+            colorsText: [
+                '#000000','#1a1a1a','#333333','#4d4d4d','#666666','#808080','#999999','#b3b3b3','#cccccc','#e6e6e6','#ffffff',
+                '#990000','#cc0000','#ff0000','#ff3333','#ff6666',
+                '#cc6600','#ff9900','#ffcc00','#ffcc66',
+                '#ffff00','#ffff66','#ffff99',
+                '#006600','#009900','#00cc00','#00ff00','#66ff66','#99ff99',
+                '#000099','#0000cc','#0000ff','#3333ff','#6666ff','#9999ff',
+                '#660066','#990099','#cc00cc','#ff00ff','#ff66ff',
+                '#663300','#996633','#cc9966','#ffcc99', 'REMOVE'
+            ],
+            colorsBackground: [
+                '#000000','#1a1a1a','#333333','#4d4d4d','#666666','#808080','#999999','#b3b3b3','#cccccc','#e6e6e6','#ffffff',
+                '#990000','#cc0000','#ff0000','#ff3333','#ff6666',
+                '#cc6600','#ff9900','#ffcc00','#ffcc66',
+                '#ffff00','#ffff66','#ffff99',
+                '#006600','#009900','#00cc00','#00ff00','#66ff66','#99ff99',
+                '#000099','#0000cc','#0000ff','#3333ff','#6666ff','#9999ff',
+                '#660066','#990099','#cc00cc','#ff00ff','#ff66ff',
+                '#663300','#996633','#cc9966','#ffcc99', 'REMOVE'
+            ],
+
+            // PARAGRAPH FORMATS
+            paragraphFormat: {
+                N: 'Normal',
+                H1: 'Heading 1',
+                H2: 'Heading 2',
+                H3: 'Heading 3',
+                H4: 'Heading 4',
+                H5: 'Heading 5',
+                H6: 'Heading 6',
+                PRE: 'Preformatted',
+                BLOCKQUOTE: 'Quote',
+                ADDRESS: 'Address'
+            },
+
+            // PARAGRAPH STYLES
+            paragraphStyles: {
+                'fr-text-gray': 'Gray',
+                'fr-text-bordered': 'Bordered',
+                'fr-text-spaced': 'Spaced',
+                'fr-text-uppercase': 'Uppercase'
+            },
+
+            // LINK SETTINGS
+            linkList: [
+                { text: 'Google', href: 'https://google.com/', target: '_blank' },
+                { text: 'YouTube', href: 'https://youtube.com/', target: '_blank' },
+                { text: 'GitHub', href: 'https://github.com/', target: '_blank' },
+                { text: 'Facebook', href: 'https://facebook.com/', target: '_blank' },
+                { text: 'Wikipedia', href: 'https://wikipedia.org/', target: '_blank' }
+            ],
+            linkAttributes: { 'rel': 'nofollow' },
+            linkEditButtons: ['linkOpen', 'linkStyle', 'linkEdit', 'linkRemove', 'linkList'],
+
+            // TABLE STYLES
+            tableStyles: {
+                'table-striped': 'Striped Rows',
+                'table-bordered': 'Bordered',
+                'table-hover': 'Hover Effect',
+                'table-condensed': 'Condensed',
+                'table-responsive': 'Responsive',
+                'table-dark': 'Dark Table'
+            },
+            tableCellStyles: {
+                'bg-gray': 'Gray Background',
+                'bg-green': 'Green Background',
+                'bg-blue': 'Blue Background',
+                'bg-red': 'Red Background',
+                'bg-yellow': 'Yellow Background',
+                'highlight': 'Highlight Cell'
+            },
+
+            // IMAGE SETTINGS
+            imageDefaultWidth: 0,
+            imageUpload: false, 
+            imageResize: true,
+            imageRoundPercent: true,
+            //imageManagerLoadURL: 'https://example.com/image/',
+            //imageManagerLoadMethod: "GET",
+            imageEditButtons: [
+                'imageReplace', 'imageAlign', 'imageRemove', 'imageCaption', '|',
+                'imageLink', 'linkOpen', 'linkEdit', 'linkRemove', '-',
+                'imageDisplay', 'imageStyle', 'imageAlt', 'imageSize',
+                'imageTUI'
+            ],
+
+            // VIDEO SETTINGS
+            videoDefaultWidth: 640,
+            videoDefaultHeight: 360,
+            videoUpload: false,
+            videoResize: true,
+            videoResponsive: true,
+            videoEmbed: true,
+
+            // FILE SETTINGS
+            fileUpload: false,
+            fileAllowedTypes: ['pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'txt', 'zip'],
+            fileMaxSize: 3 * 1024 * 1024,
+
+            // CHAR COUNTER
+            charCounterCount: true,
+            //charCounterMax: 100000,
+
+            // HTML CODE VIEW
+            codeMirror: true,
+            codeMirrorOptions: {
+                indentWithTabs: true,
+                lineNumbers: true,
+                lineWrapping: true,
+                mode: 'text/html',
+                theme: isDarkMode ? 'dracula' : 'default',
+                autoCloseTags: true,
+                matchBrackets: true,
+                tabSize: 4
+            },
+
+            // SPECIAL CHARACTERS - ALL SETS 
+            specialCharactersSet: [
+                {
+                    title: 'Latin',
+                    list: ['À','Á','Â','Ã','Ä','Å','Æ','Ç','È','É','Ê','Ë','Ì','Í','Î','Ï','Ð','Ñ','Ò','Ó','Ô','Õ','Ö','Ø','Ù','Ú','Û','Ü','Ý','Þ','ß','à','á','â','ã','ä','å','æ','ç','è','é','ê','ë','ì','í','î','ï','ð','ñ','ò','ó','ô','õ','ö','ø','ù','ú','û','ü','ý','þ','ÿ']
+                },
+                {
+                    title: 'Currency',
+                    list: ['৳','$','€','£','¥','¢','₡','₢','₣','₤','₥','₦','₧','₨','₩','₪','₫','₭','₮','₯','₰','₱','₲','₳','₴','₵']
+                },
+                {
+                    title: 'Math',
+                    list: ['+','×','÷','±','∞','∑','∏','∫','√','∛','∜','=','≈','≠','≡','≤','≥','⊂','⊃','⊆','⊇','⊕','⊗','⊥','⋅','∂','∇','∝','∅','∠','∴','∵']
+                },
+                {
+                    title: 'Arrows',
+                    list: ['←','↑','→','↓','↔','↕','↖','↗','↘','↙','↚','↛','↜','↝','↞','↟','↠','↡','↢','↣','↤','↥','↦','↧','↨','↩','↪','↫','↬','↭','↮','↯']
+                },
+                {
+                    title: 'Greek',
+                    list: ['α','β','γ','δ','ε','ζ','η','θ','ι','κ','λ','μ','ν','ξ','ο','π','ρ','σ','τ','υ','φ','χ','ψ','ω','Α','Β','Γ','Δ','Ε','Ζ','Η','Θ','Ι','Κ','Λ','Μ','Ν','Ξ','Ο','Π','Ρ','Σ','Τ','Υ','Φ','Χ','Ψ','Ω']
+                },
+                {
+                    title: 'Technical',
+                    list: ['⌘','⌥','⇧','⌃','⎋','⌫','⌦','⏎','⇥','⇪','⏏','⎀','⎁','⎂','⎃','⎄','⎅','⎆','⎇','⎈','⎉','⎊','⎋']
+                }
+            ],
+
+            // SECURITY
+            htmlRemoveTags: ['script', 'style', 'iframe', 'object', 'embed', 'applet'],
+
+            // PASTE SETTINGS
+            pasteAllowedStyleProps: [
+                'color','font-family','font-size','font-weight','font-style',
+                'line-height','margin','padding','text-align','text-decoration',
+                'background','background-color','border','border-radius',
+                'width','height'
+            ],
+            pasteDeniedAttrs: ['id','class','style','xmlns','data-*','on*'],
+            pastePlain: false,
+
+            // KEYBOARD SHORTCUTS
+            shortcuts: {
+                'ctrl+y': 'redo',
+                'ctrl+l': 'alignLeft',
+                'ctrl+e': 'alignCenter',
+                'ctrl+r': 'alignRight',
+                'ctrl+j': 'alignJustify',
+                'ctrl+shift+o': 'formatOL',
+                'ctrl+shift+u': 'formatUL',
+                'ctrl+>': 'increaseFontSize',
+                'ctrl+<': 'decreaseFontSize',
+                'ctrl+=': 'subscript',
+                'ctrl+shift+=': 'superscript',
+                'ctrl+shift+f': 'fullscreen',
+                'ctrl+shift+c': 'codeView',
+                'ctrl+shift+h': 'help',
+                'ctrl+shift+t': 'insertTable',
+                'ctrl+shift+9': 'codeSnippet'
+            },
+            shortcutsHint: true,
+
+            // ENTER BEHAVIOR
+            enter: FroalaEditor.ENTER_P,
+
+            // TOOLBAR STICKY
+            toolbarSticky: false,
+            toolbarStickyOffset: 20,
+
+            // AUTO GROW
+            autoGrow: true,
+            autoGrowMinHeight: window.innerWidth <= 576 ? 100 : 200,
+            autoGrowMaxHeight: window.innerWidth <= 576 ? 300 : 600,
+
+            // ATTRIBUTION (REMOVE FROALA LOGO)
+            attribution: false,
+
+            // CSRF TOKEN FOR LARAVEL
+            requestHeaders: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+
+            // ALL EVENTS
+            events: {
+                'initialized': function() {
+                    console.log('Froala Editor initialized with all free features');
+                },
+
+                'contentChanged': function() {
+                    if (typeof Prism !== 'undefined') {
+                        document.querySelectorAll('pre').forEach(pre => {
+                            if (!pre.classList.contains('line-numbers')) {
+                                pre.classList.add('line-numbers');
+                            }
+
+                            // style like VS Code overflow code 
+                            pre.style.cssText = `
+                                display: inline-block !important;
+                                min-width: 100% !important;
+                                max-width: 100% !important;
+                                overflow: auto !important;
+                                overflow-x: auto !important;
+                                overflow-y: hidden !important;
+                                white-space: pre !important;
+                                word-wrap: normal !important;
+                                word-break: keep-all !important;
+                                width: auto !important;
+                                box-sizing: border-box !important;
+                            `;
+
+                            // Advance VS code like text 
+                            const codeEl = pre.querySelector('code');
+                            if (codeEl) {
+                                codeEl.style.cssText = `
+                                    display: inline-block !important;
+                                    min-width: 100% !important;
+                                    white-space: pre !important;
+                                    font-family: 'Fira Code', Consolas, Monaco, 'Courier New', monospace !important;
+                                    font-size: 14px !important;
+                                `;
+                            }
+                        });
+                        Prism.highlightAll();
+                    }
+                },
+
+                'codeSnippet.after': function($code, language) {
+                    console.log('Code snippet inserted:', language);
+                    if (typeof Prism !== 'undefined') {
+                        setTimeout(() => {
+                            document.querySelectorAll('pre').forEach(pre => {
+                                pre.classList.add('line-numbers');
+                                pre.style.cssText = `
+                                    display: inline-block !important;
+                                    min-width: 100% !important;
+                                    max-width: 100% !important;
+                                    overflow: auto !important;
+                                    overflow-x: auto !important;
+                                    overflow-y: hidden !important;
+                                    white-space: pre !important;
+                                    word-wrap: normal !important;
+                                    word-break: keep-all !important;
+                                    width: auto !important;
+                                    box-sizing: border-box !important;
+                                `;
+
+                                const codeEl = pre.querySelector('code');
+                                if (codeEl) {
+                                    codeEl.style.cssText = `
+                                        display: inline-block !important;
+                                        min-width: 100% !important;
+                                        white-space: pre !important;
+                                    `;
+                                }
+                            });
+                            Prism.highlightAll();
+                        }, 100);
+                    }
+                },
+
+                'paste.after': function() {
+                    if (typeof Prism !== 'undefined') {
+                        setTimeout(() => Prism.highlightAll(), 100);
+                    }
+                }
+            }
+        });
+    })();
+</script>
