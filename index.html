@@ -1,26 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Editor Viewer</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    button { margin: 5px; padding: 10px 20px; cursor: pointer; }
-    #viewer { width: 100%; height: 80vh; border: 1px solid #ccc; margin-top: 20px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor Viewer</title>
+
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #111827;
+            --header-bg: rgba(255, 255, 255, 0.9);
+            --border-color: #eaeaea;
+            --select-bg: white;
+            --select-border: #ddd;
+            --subtitle-color: #777;
+            --toggle-bg: #f3f4f6;
+            --toggle-thumb: #4f46e5;
+        }
+
+        body.dark {
+            --bg-color: #111827;
+            --text-color: #f9fafb;
+            --header-bg: rgba(17, 24, 39, 0.95);
+            --border-color: #374151;
+            --select-bg: #1f2937;
+            --select-border: #4b5563;
+            --subtitle-color: #9ca3af;
+            --toggle-bg: #374151;
+            --toggle-thumb: #818cf8;
+        }
+
+        * {
+            transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .header {
+            display: flex;
+            flex-direction: column;
+            padding: 12px 18px;
+            background: var(--header-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+        }
+        /* Top row: title + dropdown + toggle */
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        /* Title */
+        .title {
+            font-size: 17px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #4f46e5, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* Subtitle */
+        .subtitle {
+            font-size: 12px;
+            color: var(--subtitle-color);
+            margin-top: 3px;
+        }
+        
+        /* Dropdown (compact) */
+        .dropdown select {
+            padding: 6px 10px;
+            border-radius: 8px;
+            border: 1px solid var(--select-border);
+            background: var(--select-bg);
+            color: var(--text-color);
+            font-size: 13px;
+            cursor: pointer;
+            outline: none;
+            transition: 0.2s;
+        }
+        .dropdown select:hover {
+            border-color: #4f46e5;
+        }
+        .dropdown select:focus {
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 2px rgba(79,70,229,0.2);
+        }
+
+        /* Dark/Light Toggle Switch */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 48px;
+            height: 24px;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--toggle-bg);
+            border-radius: 34px;
+            transition: 0.3s;
+            border: 1px solid var(--select-border);
+        }
+        .slider:before {
+            position: absolute;
+            content: "☀️";
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 20px;
+            width: 20px;
+            left: 2px;
+            bottom: 1px;
+            background-color: var(--toggle-thumb);
+            border-radius: 50%;
+            transition: 0.3s;
+            color: white;
+            font-weight: bold;
+        }
+        input:checked + .slider:before {
+            content: "🌙";
+            transform: translateX(24px);
+        }
+        
+        /* iframe */
+        #viewer {
+            width: 100%;
+            height: calc(100vh - 70px);
+            border: none;
+            display: block;
+            background: var(--bg-color);
+        }
+    </style>
 </head>
 <body>
-  <h1>View Editors</h1>
-  <button onclick="loadFile('froala.html')">View Froala</button>
-  <button onclick="loadFile('jodit.html')">View Jodit</button>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-top">
+            <div class="title">
+                Editor Viewer
+            </div>
+            <div style="display: flex; align-items: center; gap: 16px;">
+                <!-- Dark/Light Toggle -->
+                <div class="theme-toggle">
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="darkModeToggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <!-- Dropdown -->
+                <div class="dropdown">
+                    <select id="editorSelect" onchange="loadFile(this.value)">
+                        <option value="jodit.html" selected>Jodit Editor</option>
+                        <option value="froala.html">Froala Editor</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="subtitle">
+            Preview different rich text editors
+        </div>
+    </div>
 
-  <!-- iframe to show content -->
-  <iframe id="viewer"></iframe>
+    <!-- Viewer -->
+    <iframe id="viewer" src="jodit.html"></iframe>
 
-  <script>
-    function loadFile(file) {
-      document.getElementById('viewer').src = file;
-    }
-  </script>
+    <script>
+        // Load file function
+        function loadFile(file) {
+            document.getElementById('viewer').src = file;
+        }
+
+        // Dark/Light Mode Toggle
+        const toggle = document.getElementById('darkModeToggle');
+        
+        // Check localStorage for saved theme
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark');
+            toggle.checked = true;
+        } else {
+            document.body.classList.remove('dark');
+            toggle.checked = false;
+        }
+        
+        // Toggle event
+        toggle.addEventListener('change', function() {
+            if (this.checked) {
+                document.body.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.body.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    </script>
 </body>
 </html>
