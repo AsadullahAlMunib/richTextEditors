@@ -708,7 +708,7 @@ console.log('Hello World');
         },
         aiAssistant: {
             aiAssistantCallback(prompt, htmlFragment) {
-                const API_KEY = 'AIzaSyCVhg6ddGzNWJIDUFDjA0WLDs5vfKHcHKk'; // Gemini API Key
+                const API_KEY = 'YOUR_GIMINI_API_KEY'; // Gemini API Key
                 
                 return fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${API_KEY}`, {
                     method: 'POST',
