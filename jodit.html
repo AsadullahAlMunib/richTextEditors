@@ -1,0 +1,1637 @@
+<!-- Jodit Editor CSS - Light Theme (default) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jodit@latest/es2021/jodit.fat.min.css">
+
+<!-- Prism.js for syntax highlighting -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+
+<!-- Ace Editor Theme CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/theme-monokai.min.css">
+
+<style>
+    /* Theme Variables */
+    :root {
+        --bg-primary: #ffffff;
+        --bg-secondary: #f8fafc;
+        --bg-tertiary: #f1f5f9;
+        --text-primary: #0f172a;
+        --text-secondary: #475569;
+        --border-color: #e2e8f0;
+        --accent-color: #3b82f6;
+        --accent-hover: #2563eb;
+        --danger-color: #ef4444;
+        --modal-bg: #ffffff;
+        --modal-header: #f8fafc;
+        --input-bg: #ffffff;
+        --input-border: #e2e8f0;
+        --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+        --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    }
+    
+    /* Dark Theme */
+    .dark {
+        --bg-primary: #0f172a;
+        --bg-secondary: #1e293b;
+        --bg-tertiary: #334155;
+        --text-primary: #f8fafc;
+        --text-secondary: #cbd5e1;
+        --border-color: #334155;
+        --accent-color: #3b82f6;
+        --accent-hover: #60a5fa;
+        --danger-color: #ef4444;
+        --modal-bg: #1e293b;
+        --modal-header: #0f172a;
+        --input-bg: #334155;
+        --input-border: #475569;
+        --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+        --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
+        --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5);
+        
+        /* Jodit specific - Dark */
+        --jd-color-background-default: #1e293b;
+        --jd-color-border: #334155;
+        --jd-color-panel: #0f172a;
+        --jd-color-icon: #94a3b8;
+        --jd-color-icon-hover: #f8fafc;
+        --jd-color-text: #f8fafc;
+        --jd-color-text-muted: #94a3b8;
+        --jd-color-toolbar-bg: #0f172a;
+        --jd-color-toolbar-hover: #1e293b;
+    }
+    
+    /* ===== JODIT TOOLBAR ICONS ===== */
+    .dark .jodit-toolbar-button__icon svg,
+    .dark .jodit-toolbar-button svg,
+    .dark .jodit-toolbar__box svg,
+    .dark .jodit-toolbar-list__item svg,
+    .dark .jodit-ui-button__icon svg,
+    .dark button[data-tooltip="Markdown"] svg {
+        color: var(--jd-color-icon) !important;
+        fill: var(--jd-color-icon) !important;
+    }
+
+    .dark .jodit-toolbar-button:hover svg,
+    .dark .jodit-toolbar-list__item:hover svg,
+    .dark button[data-tooltip="Markdown"]:hover svg {
+        color: var(--jd-color-icon-hover) !important;
+        fill: var(--jd-color-icon-hover) !important;
+    }
+
+    /* Dropdown arrow */
+    .dark .jodit-toolbar-button__arrow svg {
+        color: var(--jd-color-icon) !important;
+        fill: var(--jd-color-icon) !important;
+    }
+
+    /* ===== JODIT TOOLBAR BACKGROUND ===== */
+    .dark .jodit-toolbar {
+        background: var(--jd-color-toolbar-bg) !important;
+        border-bottom: 1px solid var(--jd-color-border) !important;
+    }
+
+    .dark .jodit-toolbar__box {
+        background: var(--jd-color-toolbar-bg) !important;
+    }
+
+    .dark .jodit-toolbar-button:not([disabled]):hover {
+        background: var(--jd-color-toolbar-hover) !important;
+    }
+
+    /* ===== JODIT DROPDOWN MENUS ===== */
+    .dark .jodit-toolbar-list,
+    .dark .jodit-toolbar-popup {
+        background: var(--jd-color-panel) !important;
+        border: 1px solid var(--jd-color-border) !important;
+        box-shadow: var(--shadow-md) !important;
+    }
+
+    .dark .jodit-toolbar-list__item {
+        color: var(--jd-color-text) !important;
+    }
+
+    .dark .jodit-toolbar-list__item:hover {
+        background: var(--jd-color-toolbar-hover) !important;
+        color: var(--jd-color-text) !important;
+    }
+
+    /* ===== JODIT EDITOR AREA ===== */
+    .dark .jodit-wysiwyg {
+        background: var(--jd-color-background-default) !important;
+        color: var(--jd-color-text) !important;
+    }
+
+    .dark .jodit-workplace {
+        background: var(--jd-color-background-default) !important;
+    }
+
+    /* ===== JODIT STATUS BAR ===== */
+    .dark .jodit-status-bar {
+        background: var(--jd-color-panel) !important;
+        border-top: 1px solid var(--jd-color-border) !important;
+        color: var(--jd-color-text-muted) !important;
+    }
+
+    /* Modal Styles */
+    .custom-jodit-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999999;
+        justify-content: center;
+        align-items: center;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    
+    .custom-jodit-modal.active {
+        display: flex;
+    }
+    
+    .jodit-modal-content {
+        background: var(--modal-bg);
+        border-radius: 8px;
+        width: 900px;
+        max-width: 95%;
+        max-height: 85vh;
+        overflow: hidden;
+        box-shadow: var(--shadow-lg);
+        border: 1px solid var(--border-color);
+        transition: all 0.3s ease;
+    }
+    
+    .jodit-modal-header {
+        background: var(--modal-header);
+        padding: 15px 20px;
+        color: var(--text-primary);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid var(--accent-color);
+    }
+    
+    .jodit-modal-header h3 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--text-primary);
+    }
+    
+    .jodit-close-btn {
+        background: none;
+        border: none;
+        color: var(--text-secondary);
+        font-size: 22px;
+        cursor: pointer;
+        padding: 0 5px;
+    }
+    
+    .jodit-close-btn:hover {
+        color: var(--text-primary);
+    }
+    
+    .jodit-modal-body {
+        padding: 20px;
+        background: var(--modal-bg);
+        max-height: 60vh;
+        overflow-y: auto;
+    }
+    
+    .jodit-form-group {
+        margin-bottom: 20px;
+    }
+    
+    .jodit-form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--text-secondary);
+        font-size: 13px;
+        font-weight: 500;
+    }
+    
+    .jodit-form-group select {
+        width: 100%;
+        padding: 10px 12px;
+        background: var(--input-bg);
+        border: 1px solid var(--input-border);
+        color: var(--text-primary);
+        border-radius: 4px;
+        font-size: 13px;
+        outline: none;
+    }
+    
+    .jodit-form-group select:focus {
+        border-color: var(--accent-hover);
+    }
+    
+    /* Ace Editor Container */
+    #aceEditor {
+        width: 100%;
+        height: 350px;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+        font-size: 14px;
+    }
+    
+    /* Ace Editor Status Bar */
+    .ace-status-bar {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 12px;
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border-color);
+        border-top: none;
+        border-radius: 0 0 4px 4px;
+        font-size: 12px;
+        color: var(--text-secondary);
+    }
+    
+    .ace-status-item {
+        display: flex;
+        gap: 15px;
+    }
+    
+    .ace-status-item span {
+        background: var(--bg-secondary);
+        padding: 2px 8px;
+        border-radius: 3px;
+    }
+    
+    .jodit-modal-footer {
+        padding: 15px 20px;
+        background: var(--modal-header);
+        border-top: 1px solid var(--border-color);
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+    }
+    
+    .jodit-btn {
+        padding: 8px 20px;
+        border: none;
+        border-radius: 4px;
+        font-size: 13px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.2s;
+    }
+    
+    .jodit-btn-primary {
+        background: var(--accent-color);
+        color: #fff;
+    }
+    
+    .jodit-btn-primary:hover {
+        background: var(--accent-hover);
+    }
+    
+    .jodit-btn-secondary {
+        background: var(--bg-tertiary);
+        color: var(--text-primary);
+    }
+    
+    .jodit-btn-secondary:hover {
+        background: var(--border-color);
+    }
+    
+    /* Code Block Styles */
+    .jodit-code-snippet {
+        margin: 20px 0;
+        border-radius: 6px;
+        overflow: hidden;
+        border: 1px solid var(--border-color);
+        background: var(--bg-secondary);
+        position: relative;
+        transition: all 0.3s ease;
+    }
+    
+    .jodit-code-header {
+        background: var(--modal-header);
+        padding: 10px 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .jodit-code-lang {
+        background: var(--accent-color);
+        color: #fff;
+        padding: 3px 12px;
+        border-radius: 3px;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+    
+    .line-numbers {
+        position: relative !important;
+        padding-left: 3.8em !important;
+        counter-reset: linenumber !important;
+    }
+    
+    .line-numbers .line-numbers-rows {
+        position: absolute !important;
+        pointer-events: none !important;
+        top: 0 !important;
+        font-size: 100% !important;
+        left: -3.8em !important;
+        width: 3em !important;
+        letter-spacing: -1px !important;
+        border-right: 1px solid #999 !important;
+        user-select: none !important;
+        counter-reset: linenumber !important;
+    }
+    
+    .line-numbers-rows > span {
+        display: block !important;
+        counter-increment: linenumber !important;
+    }
+    
+    .line-numbers-rows > span::before {
+        content: counter(linenumber) !important;
+        color: #999 !important;
+        display: block !important;
+        padding-right: 0.8em !important;
+        text-align: right !important;
+    }
+    
+    @media (max-width:576px){
+        .jodit-wysiwyg{
+            min-height: 200px !important;
+            max-height: 500px !important;
+            overflow-y: auto !important;
+        }
+    }
+    
+    @media (min-width:577px){
+        .jodit-wysiwyg{
+            min-height: 400px !important;
+            max-height: 800px !important;
+            overflow-y: auto !important;
+        }
+    }
+</style>
+
+<!-- Textarea -->
+<textarea id="richTextEditor" name="content" placeholder="Write your content here..."></textarea>
+
+<!-- Custom Modal - Add/Edit Mode with Ace Editor -->
+<div id="joditCodeModal" class="custom-jodit-modal">
+    <div class="jodit-modal-content">
+        <div class="jodit-modal-header">
+            <h3><span id="modalTitle">📝 Insert Code Snippet</span></h3>
+            <button class="jodit-close-btn" onclick="closeJoditModal()">&times;</button>
+        </div>
+        
+        <div class="jodit-modal-body">
+            <input type="hidden" id="editCodeId" value="">
+            
+            <div class="jodit-form-group">
+                <label>Language:</label>
+                <select id="joditCodeLanguage">
+                    <!-- ========== MOST USED LANGUAGES (Top 20) ========== -->
+                    <option value="javascript">JavaScript</option>
+                    <option value="python">Python</option>
+                    <option value="php">PHP</option>
+                    <option value="html">HTML</option>
+                    <option value="css">CSS</option>
+                    <option value="typescript">TypeScript</option>
+                    <option value="java">Java</option>
+                    <option value="csharp">C#</option>
+                    <option value="cpp">C++</option>
+                    <option value="c">C</option>
+                    <option value="sql">SQL</option>
+                    <option value="go">Go</option>
+                    <option value="rust">Rust</option>
+                    <option value="ruby">Ruby</option>
+                    <option value="swift">Swift</option>
+                    <option value="kotlin">Kotlin</option>
+                    <option value="dart">Dart</option>
+                    <option value="json">JSON</option>
+                    <option value="svg">SVG</option>
+                    <option value="markdown">Markdown</option>
+                    <option value="yaml">YAML</option>
+                    
+                    <!-- ========== WEB TECHNOLOGIES ========== -->
+                    <option value="jsx">JSX (React)</option>
+                    <option value="tsx">TSX (React)</option>
+                    <option value="xml">XML</option>
+                    <option value="graphql">GraphQL</option>
+                    
+                    <!-- ========== C FAMILY ========== -->
+                    <option value="ino">Arduino</option>
+                    <option value="objectivec">Objective-C</option>
+                    <option value="arm-asm">Assembly</option>
+                    
+                    <!-- ========== DATABASE ========== -->
+                    <option value="mysql">MySQL</option>
+                    <option value="postgresql">PostgreSQL</option>
+                    
+                    <!-- ========== SHELL ========== -->
+                    <option value="bash">Bash</option>
+                    <option value="powershell">PowerShell</option>
+                    <option value="batch">Batch</option>
+                    
+                    <!-- ========== MOBILE ========== -->
+                    <option value="dart">Flutter</option>
+                    <option value="jsx">React Native</option>
+                    
+                    <!-- ========== MOBILE ========== -->
+                    <option value="ini">INI</option>
+                    <option value="dockerfile">DockerFile</option>
+                    
+                    <!-- ========== DATA SCIENCE ========== -->
+                    <option value="r">R</option>
+                    <option value="matlab">MATLAB</option>
+                    
+                    <!-- ========== DATA SCIENCE ========== -->
+                    <option value="django">Django</option>
+                </select>
+            </div>
+            
+            <div class="jodit-form-group">
+                <label>Code:</label>
+                <div id="aceEditor"></div>
+                <div class="ace-status-bar">
+                    <div class="ace-status-item">
+                        <span id="cursorPosition">Ln 1, Col 1</span>
+                        <span id="selectionLength"></span>
+                    </div>
+                    <div class="ace-status-item">
+                        <span id="lineCount">Lines: 1</span>
+                        <span id="charCount">Chars: 0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="jodit-modal-footer">
+            <button class="jodit-btn jodit-btn-secondary" onclick="closeJoditModal()">Cancel</button>
+            <button class="jodit-btn jodit-btn-primary" id="modalActionBtn" onclick="insertJoditCode()">Insert Code</button>
+        </div>
+    </div>
+</div>
+
+<!-- Markdown Modal with Toggle Preview -->
+<div id="joditMarkdownModal" class="custom-jodit-modal">
+    <div class="jodit-modal-content" style="width: 900px; max-width: 95%;">
+        <div class="jodit-modal-header">
+            <h3><span>📝 Insert Markdown</span></h3>
+            <button class="jodit-close-btn" onclick="closeMarkdownModal()">&times;</button>
+        </div>
+        
+        <div class="jodit-modal-body" style="max-height: 70vh;">
+            <!-- Toolbar for Markdown -->
+            <div style="display: flex; justify-content: space-between; margin-bottom: 15px; padding: 5px; background: var(--bg-tertiary); border-radius: 4px;">
+                <button class="jodit-btn jodit-btn-secondary" onclick="insertSampleMarkdown()" style="padding: 6px 12px;">Sample</button>
+                <button class="jodit-btn jodit-btn-secondary" id="togglePreviewBtn" onclick="togglePreview()" style="padding: 6px 12px; min-width: 100px;">Preview</button>
+                <button class="jodit-btn jodit-btn-primary" onclick="insertMarkdown()">Insert</button>
+            </div>
+            
+            <!-- Split View Container -->
+            <div style="display: flex; gap: 20px;">
+                <!-- Left: Markdown Input -->
+                <div id="markdownInputContainer" style="flex: 1;">
+                    <label style="font-size: 13px; font-weight: 500; color: var(--text-secondary); margin-bottom: 8px; display: block;">
+                        Markdown:
+                    </label>
+                    <textarea id="joditMarkdownContent" rows="20" placeholder="# Heading 1
+
+**Bold text** and *italic*
+
+- List item 1
+- List item 2
+
+```javascript
+console.log('Hello World');
+```" 
+                        style="width:100%; height:400px; font-family:monospace; padding:12px; background:var(--input-bg); color:var(--text-primary); border:1px solid var(--border-color); border-radius:4px; resize:vertical;"></textarea>
+                </div>
+                
+                <!-- Right: Preview (hidden by default) -->
+                <div id="markdownPreviewContainer" style="flex: 1; display: none;">
+                    <label style="font-size: 13px; font-weight: 500; color: var(--text-secondary); margin-bottom: 8px; display: block;">
+                        Preview:
+                    </label>
+                    <div id="joditMarkdownPreview" style="width:100%; height:400px; overflow-y:auto; padding:12px; background:var(--bg-secondary); color:var(--text-primary); border:1px solid var(--border-color); border-radius:4px; font-family: 'Segoe UI', Arial, sans-serif;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="jodit-modal-footer">
+            <span style="color: var(--text-secondary); font-size: 12px; align-self: center;">Ctrl+Enter to insert</span>
+        </div>
+    </div>
+</div>
+
+<!-- Prism.js JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+
+<!-- Ace Editor JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ext-language_tools.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ext-beautify.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ext-searchbox.min.js"></script>
+
+<!-- Jodit Editor JS -->
+<script src="https://cdn.jsdelivr.net/npm/jodit@latest/es2021/jodit.fat.min.js"></script>
+<script>
+    // Ace Editor instance
+    let aceEditor;
+    let currentJoditEditor;
+
+    // Mode mapping for Ace with ALL languages supported
+    const modeMap = {
+        'javascript': 'ace/mode/javascript',
+        'python': 'ace/mode/python',
+        'php': 'ace/mode/php',
+        'html': 'ace/mode/html',
+        'css': 'ace/mode/css',
+        'typescript': 'ace/mode/typescript',
+        'java': 'ace/mode/java',
+        'csharp': 'ace/mode/csharp',
+        'cpp': 'ace/mode/c_cpp',
+        'c': 'ace/mode/c_cpp',
+        'sql': 'ace/mode/sql',
+        'go': 'ace/mode/golang',
+        'rust': 'ace/mode/rust',
+        'ruby': 'ace/mode/ruby',
+        'swift': 'ace/mode/swift',
+        'kotlin': 'ace/mode/kotlin',
+        'dart': 'ace/mode/dart',
+        'json': 'ace/mode/json',
+        'svg': 'ace/mode/xml',
+        'markdown': 'ace/mode/markdown',
+        'yaml': 'ace/mode/yaml',
+        'jsx': 'ace/mode/jsx',
+        'tsx': 'ace/mode/tsx',
+        'xml': 'ace/mode/xml',
+        'graphql': 'ace/mode/graphqlschema',
+        'ino': 'ace/mode/c_cpp',
+        'objectivec': 'ace/mode/objectivec',
+        'arm-asm': 'ace/mode/assembly_x86',
+        'mysql': 'ace/mode/mysql',
+        'postgresql': 'ace/mode/pgsql',
+        'bash': 'ace/mode/sh',
+        'powershell': 'ace/mode/powershell',
+        'batch': 'ace/mode/batchfile',
+        'flutter': 'ace/mode/dart',
+        'react-native': 'ace/mode/jsx',
+        'ini': 'ace/mode/ini',
+        'dockerfile': 'ace/mode/dockerfile',
+        'r': 'ace/mode/r',
+        'matlab': 'ace/mode/matlab',
+        'django': 'ace/mode/python'
+    };
+
+    // Check dark mode from HTML class
+    const isDarkMode = document.documentElement.classList.contains('dark');
+
+    // Prism.js autoloader setup
+    Prism.plugins.autoloader.languages_path = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/';
+    
+    // Prism.js-এ Alias for SQLs
+    Prism.languages.mysql = Prism.languages.sql;
+    Prism.languages.postgresql = Prism.languages.sql;
+    Prism.languages.pgsql = Prism.languages.sql;
+
+    // Initialize Ace Editor with proper line wrap
+    function initAceEditor(language = 'javascript', code = '') {
+        /* Ace Editor - Copyright (c) 2010, Ajax.org B.V. All rights reserved. */
+        if (aceEditor) {
+            aceEditor.destroy();
+        }
+
+        aceEditor = ace.edit("aceEditor", {
+            value: code,
+            mode: modeMap[language] || 'ace/mode/javascript',
+            theme: "ace/theme/monokai",
+            fontSize: 14,
+            showPrintMargin: false,
+            showGutter: true,
+            showLineNumbers: true,
+            tabSize: 4,
+            useSoftTabs: true,
+            wrap: true,
+            wrapMethod: 'text',
+            indentedSoftWrap: false,
+            enableBasicAutocompletion: true,
+            enableLiveAutocompletion: true,
+            enableSnippets: true,
+            scrollPastEnd: false,
+            useWorker: true
+        });
+
+        // Force wrap mode
+        aceEditor.session.setUseWrapMode(true);
+        aceEditor.session.setWrapLimit(80);
+        aceEditor.session.setWrapLimitRange(80, 80);
+
+        // Set initial value
+        aceEditor.setValue(code, -1);
+
+        // Update status bar on changes
+        aceEditor.selection.on('changeCursor', updateStatusBar);
+        aceEditor.session.on('change', updateStatusBar);
+
+        // Focus editor
+        setTimeout(() => aceEditor.focus(), 100);
+    }
+
+    // Update status bar
+    function updateStatusBar() {
+        if (!aceEditor) return;
+
+        const pos = aceEditor.getCursorPosition();
+        const session = aceEditor.session;
+        const lines = session.getLength();
+        const content = session.getValue();
+        const chars = content.length;
+        const selectedText = aceEditor.getSelectedText();
+        const selectionLength = selectedText.length;
+
+        document.getElementById('cursorPosition').innerHTML = `Ln ${pos.row + 1}, Col ${pos.column + 1}`;
+        document.getElementById('lineCount').innerHTML = `Lines: ${lines}`;
+        document.getElementById('charCount').innerHTML = `Chars: ${chars}`;
+        document.getElementById('selectionLength').innerHTML = selectionLength ? `Selected: ${selectionLength}` : '';
+    }
+
+    // Update Ace mode when language changes
+    document.getElementById('joditCodeLanguage').addEventListener('change', function(e) {
+        if (aceEditor) {
+            aceEditor.session.setMode(modeMap[e.target.value] || 'ace/mode/javascript');
+        }
+    });
+
+    // Custom Code Snippet Button Define
+    Jodit.defaultOptions.controls.joditCodeSnippet = {
+        name: 'joditCodeSnippet',
+        tooltip: 'Insert Code Snippet',
+        iconURL: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNTEyIj48cGF0aCBkPSJNNjQgOTZjMC0zNS4zIDI4LjctNjQgNjQtNjRsMzg0IDBjMzUuMyAwIDY0IDI4LjcgNjQgNjRsMCAyNTYtNjQgMCAwLTI1NkwxMjggOTZsMCAyNTYtNjQgMEw2NCA5NnpNMCA0MDMuMkMwIDM5Mi42IDguNiAzODQgMTkuMiAzODRsNjAxLjYgMGMxMC42IDAgMTkuMiA4LjYgMTkuMiAxOS4yYzAgNDIuNC0zNC40IDc2LjgtNzYuOCA3Ni44TDc2LjggNDgwQzM0LjQgNDgwIDAgNDQ1LjYgMCA0MDMuMnpNMjgxIDIwOWwtMzEgMzEgMzEgMzFjOS40IDkuNCA5LjQgMjQuNiAwIDMzLjlzLTI0LjYgOS40LTMzLjkgMGwtNDgtNDhjLTkuNC05LjQtOS40LTI0LjYgMC0zMy45bDQ4LTQ4YzkuNC05LjQgMjQuNi05LjQgMzMuOSAwczkuNCAyNC42IDAgMzMuOXpNMzkzIDE3NWw0OCA0OGM5LjQgOS40IDkuNCAyNC42IDAgMzMuOWwtNDggNDhjLTkuNCA5LjQtMjQuNiA5LjQtMzMuOSAwcy05LjQtMjQuNiAwLTMzLjlsMzEtMzEtMzEtMzFjLTkuNC05LjQtOS40LTI0LjYgMC0zMy45czI0LjYtOS40IDMzLjkgMHoiLz48L3N2Zz4=',
+        exec: function(editor) {
+            currentJoditEditor = editor;
+            document.getElementById('editCodeId').value = '';
+            document.getElementById('joditCodeLanguage').value = 'javascript';
+            document.getElementById('modalTitle').innerHTML = '📝 Insert Code Snippet';
+            initAceEditor('javascript', '');
+            document.getElementById('joditCodeModal').classList.add('active');
+        }
+    };
+    
+    // Markdown Button - Add this after the code above
+    Jodit.defaultOptions.controls.joditMarkdown = {
+        name: 'joditMarkdown',
+        tooltip: 'Markdown',
+        iconURL: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik01IDEybDUgNWwwLTEwIDEwIDEwIDAtMTAiLz48L3N2Zz4=',
+        exec: function(editor) {
+            window.currentJoditEditor = editor;
+            document.getElementById('joditMarkdownModal').classList.add('active');
+        }
+    };
+
+    // Editor Initializing
+    var editor = new Jodit('#richTextEditor', {
+        width: '100%',
+        theme: isDarkMode ? 'dark' : 'default',
+        style: {
+            font: '14px',
+        },
+        aiAssistant: {
+            aiAssistantCallback(prompt, htmlFragment) {
+                const API_KEY = 'AIzaSyCVhg6ddGzNWJIDUFDjA0WLDs5vfKHcHKk'; // Gemini API Key
+                
+                return fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${API_KEY}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [
+                                { text: prompt + '\n\nContent:\n' + htmlFragment }
+                            ]
+                        }],
+                        generationConfig: {
+                            temperature: 0.7,
+                            maxOutputTokens: 1000
+                        }
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) throw new Error(data.error.message);
+                    
+                    let markdownContent = data.candidates[0].content.parts[0].text;
+                    
+                    // Markdown to HTML converter
+                    return convertMarkdownToHTML(markdownContent);
+                })
+                .catch(error => {
+                    console.error('Gemini API Error:', error);
+                    return '<p>Error: ' + error.message + '</p>';
+                });
+            }
+        },
+        hidePoweredByJodit: true,
+        disablePlugins: ['about'],
+        buttons: Jodit.defaultOptions.buttons.concat([
+            'joditCodeSnippet',
+            'joditMarkdown'
+        ])
+    });
+
+    // Modal Function
+    function closeJoditModal() {
+        document.getElementById('joditCodeModal').classList.remove('active');
+        if (aceEditor) {
+            aceEditor.destroy();
+        }
+    }
+
+    function insertJoditCode() {
+        const language = document.getElementById('joditCodeLanguage').value;
+        const code = aceEditor ? aceEditor.getValue() : '';
+        const editId = document.getElementById('editCodeId').value;
+
+        if (!code.trim()) {
+            alert('Please enter some code!');
+            return;
+        }
+
+        // Code escape
+        const escapedCode = code.replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+
+        const uniqueId = editId || 'code-' + Date.now();
+        const codeHTML = generateCodeHTML(language, escapedCode, uniqueId);
+
+        if (editId) {
+            const existingBlock = document.getElementById(editId);
+            if (existingBlock) existingBlock.outerHTML = codeHTML;
+        } else {
+            if (currentJoditEditor) {
+                currentJoditEditor.selection.insertHTML(codeHTML);
+            } else {
+                editor.selection.insertHTML(codeHTML);
+            }
+        }
+
+        closeJoditModal();
+
+        setTimeout(() => {
+            Prism.highlightAll();
+            document.querySelectorAll('.line-numbers').forEach(element => {
+                if (!element.querySelector('.line-numbers-rows')) {
+                    Prism.plugins.lineNumbers.resize(element);
+                }
+            });
+        }, 200);
+    }
+
+    function generateCodeHTML(language, escapedCode, uniqueId) {
+        const languageNames = {
+            // ========== MOST USED LANGUAGES (Top 20) ==========
+            'javascript': 'JavaScript',
+            'js': 'JavaScript',
+            'python': 'Python',
+            'py': 'Python',
+            'php': 'PHP',
+            'html': 'HTML',
+            'css': 'CSS',
+            'typescript': 'TypeScript',
+            'ts': 'TypeScript',
+            'java': 'Java',
+            'csharp': 'C#',
+            'cs': 'C#',
+            'c#': 'C#',
+            'cpp': 'C++',
+            'c++': 'C++',
+            'c': 'C',
+            'sql': 'SQL',
+            'go': 'Go',
+            'golang': 'Go',
+            'rust': 'Rust',
+            'ruby': 'Ruby',
+            'rb': 'Ruby',
+            'swift': 'Swift',
+            'kotlin': 'Kotlin',
+            'dart': 'Dart',
+            'json': 'JSON',
+            'svg': 'SVG',
+            'markdown': 'Markdown',
+            'md': 'Markdown',
+            'yaml': 'YAML',
+            'yml': 'YAML',
+            
+            // ========== WEB TECHNOLOGIES ==========
+            'jsx': 'JSX (React)',
+            'tsx': 'TSX (React)',
+            'xml': 'XML',
+            'graphql': 'GraphQL',
+            
+            // ========== C FAMILY ==========
+            'ino': 'Arduino',
+            'objectivec': 'Objective-C',
+            'objc': 'Objective-C',
+            'arm-asm': 'Assembly',
+            'assembly': 'Assembly',
+            
+            // ========== DATABASE ==========
+            'mysql': 'MySQL',
+            'postgresql': 'PostgreSQL',
+            'pgsql': 'PostgreSQL',
+            
+            // ========== SHELL ==========
+            'bash': 'Bash',
+            'sh': 'Shell',
+            'shell': 'Shell',
+            'powershell': 'PowerShell',
+            'ps1': 'PowerShell',
+            'batch': 'Batch',
+            'bat': 'Batch',
+            
+            // ========== MOBILE ==========
+            'flutter': 'Flutter',  // dart already mapped
+            'react-native': 'React Native',
+            
+            // ========== CONFIG FILES ==========
+            'ini': 'INI',
+            'dockerfile': 'Dockerfile',
+            
+            // ========== DATA SCIENCE ==========
+            'r': 'R',
+            'matlab': 'MATLAB',
+            
+            // ========== FRAMEWORKS ==========
+            'django': 'Django',
+            
+            // ========== OTHERS ==========
+            'text': 'Text',
+            'txt': 'Text',
+            'plain': 'Text'
+        };
+        // Get display name (default to capitalized original if not found)
+        const displayName = languageNames[language.toLowerCase()] || 
+                           (language.charAt(0).toUpperCase() + language.slice(1).toLowerCase());
+        
+        return `
+            <div class="jodit-code-snippet" contenteditable="false" data-code-snippet="${language}" id="${uniqueId}">
+                <div class="jodit-code-header" contenteditable="false">
+                    <span class="jodit-code-lang">${displayName}</span>
+                </div>
+                <pre class="line-numbers language-${language}" style="font-size: 14px !important;"><code class="language-${language}">${escapedCode}</code></pre>
+            </div>
+        `;
+    }
+    
+    // MARKDOWN TO HTML CONVERTER - CLEAN EDITION with generateCodeHTML
+    function convertMarkdownToHTML(md, baseUrl = window.location.origin) {
+        if (!md || typeof md !== 'string') return '';
+        
+        // Reference links storage
+        let referenceLinks = {};
+        
+        // First pass: Extract reference links
+        md = md.replace(/^\[([^\]]+)\]:\s*(\S+)(?:\s+"([^"]*)")?\s*$/gm, function(match, label, url, title) {
+            referenceLinks[label.toLowerCase()] = { url, title };
+            return '';
+        });
+        
+        // Emoji map
+        const emojiMap = {
+            'smile': '😊', 'smiley': '😃', 'heart': '❤️', 'thumbsup': '👍',
+            'thumbsdown': '👎', 'rocket': '🚀', 'fire': '🔥', 'warning': '⚠️',
+            'check': '✅', 'x': '❌', 'white_check_mark': '✅', 'heavy_check_mark': '✔️',
+            'heavy_multiplication_x': '✖️', 'sparkles': '✨', 'star': '⭐', 'star2': '🌟',
+            'zap': '⚡', '100': '💯', 'balloon': '🎈', 'tada': '🎉', 'bulb': '💡',
+            'book': '📖', 'computer': '💻', 'keyboard': '⌨️', 'link': '🔗', 'gear': '⚙️',
+            'memo': '📝', 'pencil': '✏️', 'scissors': '✂️', 'pushpin': '📌', 'paperclip': '📎',
+            'clock': '🕐', 'alarm': '⏰', 'hourglass': '⌛', 'watch': '⌚', 'calendar': '📅',
+            'mail': '📧', 'phone': '📞', 'mobile': '📱', 'computer': '💻', 'printer': '🖨️',
+            'camera': '📷', 'video': '📹', 'movie': '🎥', 'headphone': '🎧', 'music': '🎵',
+            'microphone': '🎤', 'radio': '📻', 'satellite': '📡', 'bell': '🔔', 'megaphone': '📢'
+        };
+        
+        let html = md
+            .trim()
+            
+            // ========== 1. HEADERS (H1 to H6) ==========
+            .replace(/^###### (.*$)/gim, '<h6 style="margin:0.5em 0; font-weight:bold;">$1</h6>')
+            .replace(/^##### (.*$)/gim, '<h5 style="margin:0.5em 0; font-weight:bold;">$1</h5>')
+            .replace(/^#### (.*$)/gim, '<h4 style="margin:0.5em 0; font-weight:bold;">$1</h4>')
+            .replace(/^### (.*$)/gim, '<h3 style="margin:0.5em 0; font-weight:bold;">$1</h3>')
+            .replace(/^## (.*$)/gim, '<h2 style="margin:0.5em 0; font-weight:bold;">$1</h2>')
+            .replace(/^# (.*$)/gim, '<h1 style="margin:0.5em 0; font-weight:bold;">$1</h1>')
+            
+            // ========== 2. HORIZONTAL RULES ==========
+            .replace(/^\s*(---|\*\*\*\*|____)\s*$/gm, '<hr style="border:0; border-top:2px solid #dddddd; margin:1.5em 0;">')
+            
+            // ========== 3. UNDERLINE & BOLD & ITALIC (Nested) ==========
+            .replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>')
+            .replace(/___(.*?)___/g, '<u><strong>$1</strong></u>')
+            .replace(/__(.*?)__/g, '<em><u>$1</u></em>')
+            
+            // ========== 4. UNDERLINE & BOLD & ITALIC ==========
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*(.*?)\*/g, '<em>$1</em>')
+            .replace(/_(.*?)_/g, '<u>$1</u>')
+            
+            // ========== 5. STRIKETHROUGH ==========
+            .replace(/~~(.*?)~~/g, '<del>$1</del>')
+            
+            // ========== 6. HIGHLIGHT ==========
+            .replace(/==(.*?)==/g, '<mark style="background:yellow; padding:0.1em 0.2em;">$1</mark>')
+            .replace(/::(.*?)::/g, '<span style="background:yellow; padding:0.1em 0.2em;">$1</span>')
+            
+            // ========== 7. SUBSCRIPT & SUPERSCRIPT ==========
+            .replace(/~([^~]+)~/g, '<sub>$1</sub>')
+            .replace(/\^([^\^]+)\^/g, '<sup>$1</sup>') 
+            
+            // ========== 8. BLOCKQUOTES & ALARTS ==========
+            .replace(/^(>+)(?:\s*(.*?)$)?(?:\n(>+)(?:\s*(.*?)$)?)*/gm, function(match) {
+                const lines = match.split('\n');
+                let result = '';
+                let currentLevel = 0;
+                let stack = [];
+                
+                // Check if this is an alart (starts with [!])
+                const isAlart = lines[0].includes('[!');
+                let alartType = '';
+                let alartIcon = '';
+                let alartColor = '';
+                let alartBg = '';
+                
+                if (isAlart) {
+                    // Extract alart type from first line
+                    const alartMatch = lines[0].match(/\[!(IMPORTANT|TIP|NOTE|WARNING|CAUTION)\]/i);
+                    if (alartMatch) {
+                        alartType = alartMatch[1].toUpperCase();
+                        
+                        // Set alart styles based on type
+                        switch(alartType) {
+                            case 'IMPORTANT':
+                                alartIcon = '⚠️';
+                                alartColor = '#856404';
+                                alartBg = '#fff3cd';
+                                break;
+                            case 'TIP':
+                                alartIcon = '💡';
+                                alartColor = '#155724';
+                                alartBg = '#d4edda';
+                                break;
+                            case 'NOTE':
+                                alartIcon = '📝';
+                                alartColor = '#0c5460';
+                                alartBg = '#d1ecf1';
+                                break;
+                            case 'WARNING':
+                                alartIcon = '⚠️';
+                                alartColor = '#856404';
+                                alartBg = '#fff3cd';
+                                break;
+                            case 'CAUTION':
+                                alartIcon = '🚨';
+                                alartColor = '#721c24';
+                                alartBg = '#f8d7da';
+                                break;
+                        }
+                    }
+                }
+                
+                // Process each line
+                for (let i = 0; i < lines.length; i++) {
+                    const line = lines[i];
+                    
+                    // Remove alart marker from first line if present
+                    let processedLine = line;
+                    if (i === 0 && isAlart) {
+                        processedLine = line.replace(/\[!(?:IMPORTANT|TIP|NOTE|WARNING|CAUTION)\]\s*/i, '');
+                    }
+                    
+                    const quoteMatch = processedLine.match(/^(>+)(?:\s*(.*?)$)?/);
+                    
+                    if (quoteMatch) {
+                        const level = quoteMatch[1].length;
+                        let content = quoteMatch[2] || '';
+                        
+                        // Handle level changes
+                        if (level > currentLevel) {
+                            // Open new blockquotes
+                            for (let l = currentLevel; l < level; l++) {
+                                if (isAlart && l === 0) {
+                                    // First level gets alart styling
+                                    result += `<blockquote style="border-left:4px solid ${alartColor}; background:${alartBg}; color:${alartColor}; margin:1em 0; padding:1em; border-radius:4px;">`;
+                                    if (alartType) {
+                                        result += `<strong style="display:block; margin-bottom:0.5em; font-size:1.1em;">${alartIcon} ${alartType}</strong>`;
+                                    }
+                                } else {
+                                    // Nested levels get normal styling
+                                    result += '<blockquote style="border-left:4px solid #dddddd; margin:0.5em 0; padding-left:1em; color:#666666; font-style:italic;">';
+                                }
+                                stack.push('blockquote');
+                            }
+                        } else if (level < currentLevel) {
+                            // Close extra blockquotes
+                            for (let l = currentLevel; l > level; l--) {
+                                result += '</blockquote>';
+                                stack.pop();
+                            }
+                        }
+                        
+                        // Handle empty content
+                        if (content.trim() === '') {
+                            result += '<br>';
+                        } else {
+                            // Add content
+                            result += content;
+                            
+                            // Add line break if next line is also a blockquote
+                            if (i < lines.length - 1 && lines[i + 1].match(/^>/)) {
+                                result += '<br>';
+                            }
+                        }
+                        
+                        currentLevel = level;
+                    }
+                }
+                
+                // Close all remaining blockquotes
+                while (stack.length > 0) {
+                    result += '</blockquote>';
+                    stack.pop();
+                }
+                
+                return result;
+            })
+            
+            // ========== 9. TASK LISTS (with indentation) ==========
+            .replace(/^(\s*)([-+*]|[a-zA-Z]\.|[0-9]+\.|[ivxlcdm]+\.|[IVXLCDM]+\.)(\s+)(.*$)/gm, function(match, spaces, marker, spacing, content) {
+                const indentLevel = Math.floor(spaces.length / 3);
+                const markerType = marker;
+                
+                const taskMatch = content.match(/^\[\s*\]\s+(.*)$/);
+                const taskCheckedMatch = content.match(/^\[\s*x\s*\]\s+(.*)$/i);
+                
+                if (taskMatch || taskCheckedMatch) {
+                    const taskContent = taskMatch ? taskMatch[1] : taskCheckedMatch[1];
+                    const isChecked = !!taskCheckedMatch;
+                    return `%%%TASK_ITEM%%%${indentLevel}%%%${isChecked ? 'checked' : 'unchecked'}%%%${taskContent}%%%`;
+                } else {
+                    return `%%%LIST_ITEM%%%${indentLevel}%%%${markerType}%%%${content}%%%`;
+                }
+            })
+            
+            // ========== 10. IMAGES ==========
+            .replace(/!\[(.*?)\]\((.*?)(?:\s+"(.*?)")?\)/gim, '<img src="$2" alt="$1" loading="lazy" style="max-width:100%; height:auto; border-radius:4px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">')
+            
+            // ========== 11. MATH (Basic) ==========
+            .replace(/\$\$(.*?)\$\$/g, '<div style="font-family:monospace; background:#f5f5f5; color:#333; padding:1em; margin:1em 0; text-align:center; border-radius:4px; overflow-x:auto;">$$$1$$</div>')
+            .replace(/\$(.*?)\$/g, '<span style="font-family:monospace; background:#f5f5f5; color:#333; padding:2px 4px; border-radius:3px;">$$$1$$</span>')
+            
+            // ========== 12. FOOTNOTES ==========
+            .replace(/\[\^(\d+)\]:\s*(.+)$/gm, '<div style="margin:0.5em 0; font-size:0.9em; color:#666666;"><sup style="color:#0366d6;">$1</sup> $2</div>')
+            .replace(/\[\^(\d+)\]/g, '<sup style="color:#0366d6; cursor:pointer; font-weight:bold;">[$1]</sup>')
+            
+            // ========== 13. ABBREVIATIONS ==========
+            .replace(/\*\[([^\]]+)\]:\s*(.+)$/gm, '<abbr title="$2" style="border-bottom:1px dotted #dddddd; cursor:help;">$1</abbr>')
+            
+            // ========== 14. EMOJI ==========
+            .replace(/:([a-zA-Z0-9_]+):/g, function(match, name) {
+                return emojiMap[name] || match;
+            })
+            
+            // ========== 15. MENTIONS (@username) ==========
+            .replace(/(?:^|\s)@([a-zA-Z0-9-]+)(?![a-zA-Z0-9-])/g, function(match, username) {
+                return ` <a href="${baseUrl}/profile/${username}" style="background:#f0f0f0; color:#0366d6; padding:2px 4px; border-radius:3px; text-decoration:none; font-weight:500;">@${username}</a>`;
+            })
+            
+            // ========== 16. REFERENCE LINKS ==========
+            .replace(/\[([^\]]+)\]\[([^\]]*)\]/g, function(match, text, ref) {
+                ref = ref || text;
+                const link = referenceLinks[ref.toLowerCase()];
+                if (link) {
+                    return `<a href="${link.url}" style="color:#0366d6; text-decoration:none; border-bottom:1px solid rgba(3,102,214,0.3);">${text}</a>`;
+                }
+                return `[${text}]`;
+            })
+            
+            // ========== 17. STANDARD LINKS ==========
+            .replace(/\[([^\]]+)\]\(([^)]+)(?:\s+"([^"]*)")?\)/g, function(match, text, url, title) {
+                const titleAttr = title ? ` title="${title}"` : '';
+                let finalUrl = url.trim();
+                
+                if (finalUrl.startsWith('/')) {
+                    finalUrl = baseUrl + finalUrl;
+                }
+                
+                const isExternal = finalUrl.startsWith('http') && !finalUrl.startsWith(baseUrl);
+                const target = isExternal ? ' target="_blank" rel="noopener noreferrer"' : '';
+                
+                return `<a href="${finalUrl}"${titleAttr}${target} style="color:#0366d6; text-decoration:none; border-bottom:1px solid rgba(3,102,214,0.3);">${text}</a>`;
+            })
+            
+            // ========== 18. AUTO-LINKS ==========
+            .replace(/(?<![=&"'])\b(https?:\/\/[^\s<]+[^<.,:;"')\]\s])\b(?![^<]*>)/g, function(match, url) {
+                const finalUrl = url.trim();
+                const isExternal = !finalUrl.startsWith(baseUrl);
+                const target = isExternal ? ' target="_blank" rel="noopener noreferrer"' : '';
+                return `<a href="${finalUrl}"${target} style="color:#0366d6; text-decoration:none; border-bottom:1px solid rgba(3,102,214,0.3);">${finalUrl}</a>`;
+            })
+            .replace(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+)(?!@)/g, '<a href="mailto:$1" style="color:#0366d6; text-decoration:none; border-bottom:1px solid rgba(3,102,214,0.3);">$1</a>')
+            
+            // ========== 19. TABLES ==========
+            .replace(/\|(.+)\|\n\|([-\s|]+)\|\n((?:\|.+\|\n?)+)/g, function(match, header, separator, rows) {
+                let table = '<div style="overflow-x:auto; margin:1em 0;"><table style="width:100%; border-collapse:collapse; font-size:0.9em;">';
+                
+                // Parse alignment
+                const alignments = separator.split('|').filter(cell => cell.trim()).map(cell => {
+                    if (cell.trim().startsWith(':') && cell.trim().endsWith(':')) return 'center';
+                    if (cell.trim().endsWith(':')) return 'right';
+                    if (cell.trim().startsWith(':')) return 'left';
+                    return 'left';
+                });
+                
+                // Header
+                table += '<thead><tr style="background:#f5f5f5;">';
+                const headers = header.split('|').map(cell => cell.trim()).filter(cell => cell);
+                headers.forEach((cell, i) => {
+                    const align = alignments[i] || 'left';
+                    table += `<th style="text-align:${align}; border:1px solid #dddddd; padding:8px; font-weight:bold;">${cell}</th>`;
+                });
+                table += '</tr></thead><tbody>';
+                
+                // Rows
+                rows.trim().split('\n').forEach(row => {
+                    if (row.trim().startsWith('|')) {
+                        const cells = row.split('|').map(cell => cell.trim()).filter(cell => cell);
+                        if (cells.length) {
+                            table += '<tr>';
+                            cells.forEach((cell, i) => {
+                                const align = alignments[i] || 'left';
+                                table += `<td style="text-align:${align}; border:1px solid #dddddd; padding:8px;">${cell}</td>`;
+                            });
+                            table += '</tr>';
+                        }
+                    }
+                });
+                
+                table += '</tbody></table></div>';
+                return table;
+            })
+            
+            // ========== 20. LINE BREAKS ==========
+            .replace(/  \n/g, '<br>')
+            .replace(/\\\n/g, '<br>')
+            .replace(/(<br>\s*){3,}/g, '<br><br>');
+        
+        // ========== 21. CODE BLOCKS ==========
+        html = html.replace(/```(\w*)\n([\s\S]*?)```/g, function(match, language, code) {
+            const langMap = {
+                'js': 'javascript', 
+                'py': 'python', 
+                'rb': 'ruby', 
+                'ts': 'typescript',
+                'sh': 'bash', 
+                'shell': 'bash', 
+                'c++': 'cpp', 
+                'cs': 'csharp',
+                'c#': 'csharp', 
+                'md': 'markdown', 
+                'txt': 'text', 
+                'htm': 'html'
+            };
+            
+            let lang = language.toLowerCase();
+            lang = langMap[lang] || lang;
+            
+            const escapedCode = code
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+            
+            const uniqueId = 'code-' + Date.now() + '-' + Math.random().toString(36).substr(2, 5);
+            
+            if (typeof generateCodeHTML === 'function') {
+                return generateCodeHTML(lang, escapedCode, uniqueId);
+            } else {
+                return `<pre class="line-numbers language-${lang}" style="background:#f5f5f5; color:#333; padding:1em; border-radius:4px; overflow-x:auto; font-family:monospace; font-size:0.9em; line-height:1.5; border:1px solid #dddddd;"><code class="language-${lang}">${escapedCode}</code></pre>`;
+            }
+        });
+        
+        // ========== 22. INLINE CODE ==========
+        html = html.replace(/`([^`\n]+)`/g, '<code style="background:#f5f5f5; color:#333; padding:2px 4px; border-radius:3px; font-family:monospace; font-size:0.9em; border:1px solid #dddddd; line-height:1.2; display:inline-block; vertical-align:top;">$1</code>');
+        
+        // ========== 23. NESTED LISTS FIX ==========
+        let listResult = [];
+        const listLines = html.split('\n');
+        let listStack = [];
+        let listIndents = [];
+        let listTypes = [];
+        
+        for (let i = 0; i < listLines.length; i++) {
+            const line = listLines[i];
+            
+            const listMatch = line.match(/^%%%LIST_ITEM%%%(\d+)%%%(.+?)%%%(.*?)%%%$/);
+            const taskMatch = line.match(/^%%%TASK_ITEM%%%(\d+)%%%(checked|unchecked)%%%(.*?)%%%$/);
+            
+            if (listMatch || taskMatch) {
+                let indentLevel, content, isOrdered = false, marker = '';
+                let isTask = false, taskChecked = false;
+                
+                if (listMatch) {
+                    indentLevel = parseInt(listMatch[1]);
+                    marker = listMatch[2];
+                    content = listMatch[3];
+                    isOrdered = marker.match(/^[a-zA-Z]\.$|[0-9]+\.$/);
+                } else {
+                    indentLevel = parseInt(taskMatch[1]);
+                    taskChecked = taskMatch[2] === 'checked';
+                    content = taskMatch[3];
+                    isTask = true;
+                }
+                
+                // Close lists that are at higher levels
+                while (listIndents.length > 0 && listIndents[listIndents.length - 1] > indentLevel) {
+                    listResult.push('</li>');
+                    listResult.push('</' + listTypes.pop() + '>');
+                    listStack.pop();
+                    listIndents.pop();
+                }
+                
+                // If same level, close previous li and start new one
+                if (listIndents.length > 0 && listIndents[listIndents.length - 1] === indentLevel) {
+                    listResult.push('</li>');
+                }
+                
+                // Open new lists if needed
+                if (listIndents.length === 0 || listIndents[listIndents.length - 1] < indentLevel) {
+                    let listType = 'ul';
+                    let listStyle = '';
+                    let listClass = '';
+                    
+                    if (isTask) {
+                        listType = 'ul';
+                        // Task lists - inline CSS only, no class
+                        listStyle = ' style="margin:0.5em 0; padding-left:1.5em; list-style:none;"';
+                    } else if (isOrdered) {
+                        listType = 'ol';
+                        const currentLevel = listIndents.length;
+                        if (currentLevel === 0) listStyle = ' style="margin:0.5em 0; padding-left:2em; list-style-type:decimal;"';
+                        else if (currentLevel === 1) listStyle = ' style="margin:0.5em 0; padding-left:2em; list-style-type:lower-roman;"';
+                        else if (currentLevel === 2) listStyle = ' style="margin:0.5em 0; padding-left:2em; list-style-type:lower-alpha;"';
+                        else if (currentLevel === 3) listStyle = ' style="margin:0.5em 0; padding-left:2em; list-style-type:bengali;"';
+                        else if (currentLevel === 4) listStyle = ' style="margin:0.5em 0; padding-left:2em; list-style-type:arabic-indic;"';
+                        else if (currentLevel === 5) listStyle = ' style="margin:0.5em 0; padding-left:2em; list-style-type:upper-alpha;"';
+                        else listStyle = ' style="margin:0.5em 0; padding-left:2em; list-style-type:upper-roman;"';
+                    } else {
+                        listType = 'ul';
+                        const currentLevel = listIndents.length;
+                        if (currentLevel === 0) listStyle = ' style="margin:0.5em 0; padding-left:2em; list-style-type:disc;"';
+                        else if (currentLevel === 1) listStyle = ' style="margin:0.5em 0; padding-left:2em; list-style-type:circle;"';
+                        else listStyle = ' style="margin:0.5em 0; padding-left:2em; list-style-type:square;"';
+                    }
+                    
+                    listResult.push('<' + listType + listStyle + '>');
+                    listTypes.push(listType);
+                    listStack.push(listType);
+                    listIndents.push(indentLevel);
+                }
+                
+                // Add the list item with proper styling for tasks
+                if (isTask) {
+                    const checkboxHtml = taskChecked ? 
+                        '<input type="checkbox" checked disabled style="margin-right:0.5em; transform:scale(1.2); flex-shrink:0; margin-top:0.2em;">' : 
+                        '<input type="checkbox" disabled style="margin-right:0.5em; transform:scale(1.2); flex-shrink:0; margin-top:0.2em;">';
+                    
+                    // Calculate nested padding based on level
+                    const nestedPadding = (listIndents.length * 1.5) + 'em';
+                    
+                    // For task items, use inline CSS only
+                    listResult.push(`<li style="margin:0.3em 0; list-style:none;">
+                        <div style="display:flex; align-items:flex-start; gap:0.5em; line-height:1.6;">
+                            ${checkboxHtml}
+                            <span>${content}</span>
+                        </div>`);
+                } else {
+                    listResult.push(`<li style="margin:0.3em 0;">${content}`);
+                }
+                
+            } else {
+                // Not a list item - close all open lists
+                while (listIndents.length > 0) {
+                    listResult.push('</li>');
+                    listResult.push('</' + listTypes.pop() + '>');
+                    listStack.pop();
+                    listIndents.pop();
+                }
+                listResult.push(line);
+            }
+        }
+        
+        // Close any remaining lists
+        while (listIndents.length > 0) {
+            listResult.push('</li>');
+            listResult.push('</' + listTypes.pop() + '>');
+            listStack.pop();
+            listIndents.pop();
+        }
+        
+        html = listResult.join('\n');
+        
+        
+        // Fix nested task list structure - ensure proper indentation
+        html = html.replace(/<ul style="margin:0.5em 0; padding-left:1.5em; list-style:none;">\s*<li[^>]*>\s*<div[^>]*>([\s\S]*?)<\/div>\s*<\/li>\s*<ul style="margin:0.5em 0; padding-left:1.5em; list-style:none;">/g, 
+            function(match, content) {
+                return '<ul style="margin:0.5em 0; padding-left:1.5em; list-style:none;"><li style="margin:0.3em 0; list-style:none;"><div style="display:flex; align-items:flex-start; gap:0.5em; line-height:1.6;">' + 
+                       content + '</div></li><ul style="margin:0.5em 0; padding-left:2.5em; list-style:none;">';
+            });
+        
+        // Fix deeper nesting levels
+        html = html.replace(/<ul style="margin:0.5em 0; padding-left:(\d+\.?\d*)em; list-style:none;">\s*<li[^>]*>\s*<div[^>]*>([\s\S]*?)<\/div>\s*<\/li>\s*<ul style="margin:0.5em 0; padding-left:\d+\.?\d*em; list-style:none;">/g, 
+            function(match, padding, content) {
+                const newPadding = (parseFloat(padding) + 1) + 'em';
+                return '<ul style="margin:0.5em 0; padding-left:' + padding + 'em; list-style:none;"><li style="margin:0.3em 0; list-style:none;"><div style="display:flex; align-items:flex-start; gap:0.5em; line-height:1.6;">' + 
+                       content + '</div></li><ul style="margin:0.5em 0; padding-left:' + newPadding + 'em; list-style:none;">';
+            });
+        
+        // ========== 24. PARAGRAPHS ==========
+        html = html.split('\n\n').map(block => {
+            block = block.trim();
+            if (!block) return '';
+            if (block.startsWith('<')) return block;
+            if (block.match(/^<(h[1-6]|ul|ol|blockquote|hr|table|div|p)/)) return block;
+            return `<p style="margin:0.8em 0; line-height:1.7;">${block}</p>`;
+        }).join('');
+        
+        // ========== 25. CLEAN EMPTY ELEMENTS ==========
+        html = html
+            .replace(/<p><\/p>/g, '')
+            .replace(/<li><\/li>/g, '');
+        
+        return html;
+    }
+    
+    // HELPER: EXTRACT METADATA FROM MARKDOWN (Optional)
+    function extractMarkdownMetadata(md) {
+        const metadata = {
+            title: '',
+            headings: [],
+            links: [],
+            images: [],
+            codeBlocks: 0,
+            wordCount: 0,
+            readingTime: 0
+        };
+        
+        // Extract title (first h1)
+        const titleMatch = md.match(/^# (.*$)/m);
+        if (titleMatch) metadata.title = titleMatch[1].trim();
+        
+        // Extract all headings
+        metadata.headings = (md.match(/^#{1,6} .*$/gm) || []).map(h => h.trim());
+        
+        // Extract links
+        metadata.links = (md.match(/\[.*?\]\(.*?\)/g) || []).map(l => l.trim());
+        
+        // Extract images
+        metadata.images = (md.match(/!\[.*?\]\(.*?\)/g) || []).map(i => i.trim());
+        
+        // Count code blocks
+        metadata.codeBlocks = (md.match(/```/g) || []).length / 2;
+        
+        // Word count
+        const textOnly = md
+            .replace(/#{1,6}\s+/g, '')
+            .replace(/\[.*?\]\(.*?\)/g, '$1')
+            .replace(/!\[.*?\]\(.*?\)/g, '')
+            .replace(/`{3}[\s\S]*?`{3}/g, '')
+            .replace(/`.*?`/g, '')
+            .replace(/\*\*|__|\*|_|~~|==|::/g, '');
+        
+        metadata.wordCount = textOnly.split(/\s+/).filter(w => w.length > 0).length;
+        metadata.readingTime = Math.ceil(metadata.wordCount / 200);
+        
+        return metadata;
+    }
+    
+    // CACHE SYSTEM (Optional)
+    const markdownCache = new Map();
+    function cachedMarkdownToHTML(md) {
+        if (!md) return '';
+        const hash = md.substring(0, 200) + md.length;
+        if (markdownCache.has(hash)) return markdownCache.get(hash);
+        const html = convertMarkdownToHTML(md);
+        if (md.length < 50000) markdownCache.set(hash, html);
+        return html;
+    }
+    
+    // State variable to track preview mode
+    let isPreviewMode = false;
+    
+    // Toggle between edit and preview mode
+    function togglePreview() {
+        const inputContainer = document.getElementById('markdownInputContainer');
+        const previewContainer = document.getElementById('markdownPreviewContainer');
+        const toggleBtn = document.getElementById('togglePreviewBtn');
+        const markdown = document.getElementById('joditMarkdownContent').value;
+        
+        if (!isPreviewMode) {
+            // Switch to preview mode
+            if (!markdown.trim()) {
+                alert('Please enter some markdown first!');
+                return;
+            }
+            
+            // Update preview
+            updateMarkdownPreview();
+            
+            // Hide input, show preview
+            inputContainer.style.display = 'none';
+            previewContainer.style.display = 'block';
+            
+            // Update button
+            toggleBtn.innerHTML = 'Edit';
+            toggleBtn.classList.add('jodit-btn-primary');
+            toggleBtn.classList.remove('jodit-btn-secondary');
+            
+            isPreviewMode = true;
+        } else {
+            // Switch back to edit mode
+            inputContainer.style.display = 'block';
+            previewContainer.style.display = 'none';
+            
+            // Update button
+            toggleBtn.innerHTML = 'Preview';
+            toggleBtn.classList.add('jodit-btn-secondary');
+            toggleBtn.classList.remove('jodit-btn-primary');
+            
+            isPreviewMode = false;
+        }
+    }
+    
+    // Update preview (called when switching to preview mode)
+    function updateMarkdownPreview() {
+        const markdown = document.getElementById('joditMarkdownContent').value;
+        const previewDiv = document.getElementById('joditMarkdownPreview');
+        
+        try {
+            const html = convertMarkdownToHTML(markdown);
+            previewDiv.innerHTML = html;
+            
+            // Re-run Prism highlighting in preview
+            setTimeout(() => {
+                Prism.highlightAllUnder(previewDiv);
+            }, 50);
+            
+        } catch (error) {
+            previewDiv.innerHTML = `<p style="color: var(--danger-color);">Error: ${error.message}</p>`;
+        }
+    }
+    
+    // Open markdown modal
+    function openMarkdownModal() {
+        const inputContainer = document.getElementById('markdownInputContainer');
+        const previewContainer = document.getElementById('markdownPreviewContainer');
+        const toggleBtn = document.getElementById('togglePreviewBtn');
+        const textarea = document.getElementById('joditMarkdownContent');
+        
+        // Reset to edit mode
+        inputContainer.style.display = 'block';
+        previewContainer.style.display = 'none';
+        toggleBtn.innerHTML = 'Preview';
+        toggleBtn.classList.remove('jodit-btn-secondary');
+        toggleBtn.classList.add('jodit-btn-primary');
+        isPreviewMode = false;
+        
+        textarea.value = '';
+        
+        document.getElementById('joditMarkdownModal').classList.add('active');
+        
+        // Focus textarea
+        setTimeout(() => textarea.focus(), 100);
+    }
+    
+    // Close markdown modal
+    function closeMarkdownModal() {
+        document.getElementById('joditMarkdownModal').classList.remove('active');
+    }
+    
+    // Insert markdown to editor
+    function insertMarkdown() {
+        const markdown = document.getElementById('joditMarkdownContent').value;
+        if (!markdown.trim()) {
+            alert('Please enter some markdown!');
+            return;
+        }
+        
+        const html = convertMarkdownToHTML(markdown);
+        
+        if (window.currentJoditEditor) {
+            window.currentJoditEditor.selection.insertHTML(html);
+        } else {
+            editor.selection.insertHTML(html);
+        }
+        
+        closeMarkdownModal();
+    }
+    
+    // Load sample markdown
+    function insertSampleMarkdown() {
+        const sample = `# Welcome to Markdown
+
+This is a **sample** markdown text.
+
+## Features:
+- 👉 Headers (H1 to H6) 
+- 👉 **Bold** and *italic* text 
+- 👉 ~~Strikethrough~~ and ==highlight== 
+- 👉 Lists (ordered and unordered) 
+- 👉 Code blocks with syntax highlighting 
+
+### Code Example:
+\`\`\`javascript
+function greet(name) {
+    return \`Hello, \${name}!\`;
+}
+console.log(greet('World'));
+\`\`\`
+
+> This is a blockquote
+
+| Feature | Support |
+|---------|---------|
+| Headers | ✅ |
+| Lists | ✅ |
+| Code | ✅ |
+| Tables | ✅ |
+
+**Click "Show Preview" to see the HTML output!** 🚀
+`;
+        
+        document.getElementById('joditMarkdownContent').value = sample;
+        
+        // If in preview mode, update preview
+        if (isPreviewMode) {
+            updateMarkdownPreview();
+        }
+    }
+    
+    // Keyboard shortcut: Ctrl+Enter to insert
+    document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && e.key === 'Enter') {
+            const modal = document.getElementById('joditMarkdownModal');
+            if (modal && modal.classList.contains('active')) {
+                e.preventDefault();
+                insertMarkdown();
+            }
+        }
+        
+        if (e.ctrlKey && e.key === 'm') {
+            e.preventDefault();
+            if (editor) {
+                window.currentJoditEditor = editor;
+                openMarkdownModal();
+            }
+        }
+    });
+    
+    // Close modal on outside click
+    document.getElementById('joditMarkdownModal').addEventListener('click', function(e) {
+        if (e.target === this) closeMarkdownModal();
+    });
+    
+    // Preview shortcut: Ctrl+P in modal
+    document.addEventListener('keydown', function(e) {
+        const modal = document.getElementById('joditMarkdownModal');
+        if (modal && modal.classList.contains('active') && e.ctrlKey && e.key === 'p') {
+            e.preventDefault();
+            togglePreview();
+        }
+    });
+    
+    // observer for dynamic content
+    const observer = new MutationObserver(() => {
+        setTimeout(() => Prism.highlightAll(), 100);
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    // Close Modal in outside click
+    document.getElementById('joditCodeModal').addEventListener('click', function(e) {
+        if (e.target === this) closeJoditModal();
+    });
+</script>
