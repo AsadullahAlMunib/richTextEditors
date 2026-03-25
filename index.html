@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Editor Viewer</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    button { margin: 5px; padding: 10px 20px; cursor: pointer; }
+    #viewer { width: 100%; height: 80vh; border: 1px solid #ccc; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>View Editors</h1>
+  <button onclick="loadFile('froala.html')">View Froala</button>
+  <button onclick="loadFile('jodit.html')">View Jodit</button>
+
+  <!-- iframe to show content -->
+  <iframe id="viewer"></iframe>
+
+  <script>
+    function loadFile(file) {
+      document.getElementById('viewer').src = file;
+    }
+  </script>
+</body>
+</html>
